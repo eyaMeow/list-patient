@@ -174,17 +174,18 @@ async function fetchAndDisplayDoctors() {
 }
 
 // Fetch Patients
-async function fetchPatients() {
+// Fetch Patients
+async function fetchPatients(highlightName = null) {
     try {
         const res = await fetch('/api/patients');
         const patients = await res.json();
-        renderPatients(patients);
+        renderPatients(patients, highlightName);
     } catch (err) {
         console.error('Error fetching patients:', err);
     }
 }
 
-function renderPatients(patients) {
+function renderPatients(patients, highlightName = null) {
     patientGrid.innerHTML = '';
     
     if (patients.length === 0) {
@@ -195,6 +196,14 @@ function renderPatients(patients) {
     patients.forEach(patient => {
         const card = document.createElement('div');
         card.className = 'patient-card';
+        
+        if (highlightName && patient.name === highlightName) {
+            card.classList.add('highlight-new');
+            // Scroll into view after a short delay to ensure rendering
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
         
         const statusClass = `status-${patient.status.toLowerCase()}`;
         
@@ -288,7 +297,7 @@ addPatientForm.addEventListener('submit', async (e) => {
             addPatientForm.reset();
             treatmentGroup.style.display = 'none';
             medicinesGroup.style.display = 'none';
-            fetchPatients(); // Refresh list
+            fetchPatients(newPatient.name); // Refresh list and highlight
         } else {
             alert(t('errorAddingPatient'));
         }
