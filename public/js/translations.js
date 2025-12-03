@@ -6,7 +6,6 @@ const translations = {
         viewDoctorsBtn: 'View Doctors',
         addPatientBtn: 'Add Patient',
         logoutBtn: 'Logout',
-        
         // Patient Card
         age: 'Age',
         diagnosis: 'Diagnosis',
@@ -22,12 +21,10 @@ const translations = {
         notAssigned: 'Not Assigned',
         editBtn: 'Edit',
         deleteBtn: 'Delete',
-        
         // Modals
         addPatientTitle: 'Add New Patient',
         editPatientTitle: 'Edit Patient',
         viewDoctorsTitle: 'All Doctors by Specialization',
-        
         // Form Fields
         fullName: 'Full Name',
         enterName: 'Enter full name',
@@ -47,7 +44,6 @@ const translations = {
         medicinesPlaceholder: 'Enter medicines separated by commas',
         medicinesHint: 'Separate multiple medicines with commas',
         updatePatientBtn: 'Update Patient',
-        
         // Doctor Types
         generalPractitioner: 'General Practitioner',
         cardiologist: 'Cardiologist',
@@ -57,7 +53,6 @@ const translations = {
         orthopedist: 'Orthopedist',
         psychiatrist: 'Psychiatrist',
         other: 'Other',
-        
         // Messages
         noPatients: 'No patients found. Add one to get started.',
         deleteConfirm: 'Are you sure you want to delete this patient? This action cannot be undone.',
@@ -115,7 +110,6 @@ const translations = {
         medicinesPlaceholder: 'Entrez les médicaments séparés par des virgules',
         medicinesHint: 'Séparez plusieurs médicaments par des virgules',
         updatePatientBtn: 'Mettre à Jour le Patient',
-        
         // Doctor Types
         generalPractitioner: 'Médecin Généraliste',
         cardiologist: 'Cardiologue',
@@ -125,7 +119,6 @@ const translations = {
         orthopedist: 'Orthopédiste',
         psychiatrist: 'Psychiatre',
         other: 'Autre',
-        
         // Messages
         noPatients: 'Aucun patient trouvé. Ajoutez-en un pour commencer.',
         deleteConfirm: 'Êtes-vous sûr de vouloir supprimer ce patient? Cette action ne peut pas être annulée.',
@@ -142,7 +135,6 @@ const translations = {
         viewDoctorsBtn: 'عرض الأطباء',
         addPatientBtn: 'إضافة مريض',
         logoutBtn: 'تسجيل الخروج',
-        
         // Patient Card
         age: 'العمر',
         diagnosis: 'التشخيص',
