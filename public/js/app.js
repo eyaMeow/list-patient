@@ -9,29 +9,24 @@ const doctorsModal = document.getElementById('doctors-modal');
 const addPatientForm = document.getElementById('add-patient-form');
 const editPatientForm = document.getElementById('edit-patient-form');
 const doctorsContainer = document.getElementById('doctors-container');
-
 // Check Auth
 const token = localStorage.getItem('token');
 if (!token) {
     window.location.href = 'index.html';
 }
-
 // Initialize language
 const savedLanguage = localStorage.getItem('language') || 'en';
 languageSelect.value = savedLanguage;
 changeLanguage(savedLanguage);
-
 // Language switcher
 languageSelect.addEventListener('change', (e) => {
     changeLanguage(e.target.value);
 });
-
 // Logout
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('token');
     window.location.href = 'index.html';
 });
-
 // Modal Logic - Close buttons
 document.querySelectorAll('.close-modal').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -45,18 +40,15 @@ document.querySelectorAll('.close-modal').forEach(btn => {
         }
     });
 });
-
 // Open Add Modal
 addPatientBtn.addEventListener('click', () => {
     addModal.classList.add('active');
 });
-
 // Open Doctors Modal
 viewDoctorsBtn.addEventListener('click', async () => {
     await fetchAndDisplayDoctors();
     doctorsModal.classList.add('active');
 });
-
 // Close modal when clicking outside
 window.addEventListener('click', (e) => {
     if (e.target === addModal) {
@@ -69,7 +61,6 @@ window.addEventListener('click', (e) => {
         doctorsModal.classList.remove('active');
     }
 });
-
 // Toggle treatment fields based on examined checkbox - Add Form
 const examinedCheckbox = document.getElementById('examined');
 const treatmentGroup = document.getElementById('treatment-group');
@@ -86,7 +77,6 @@ examinedCheckbox.addEventListener('change', (e) => {
         document.getElementById('medicines').value = '';
     }
 });
-
 // Toggle treatment fields based on examined checkbox - Edit Form
 const editExaminedCheckbox = document.getElementById('edit-examined');
 const editTreatmentGroup = document.getElementById('edit-treatment-group');
@@ -103,15 +93,12 @@ editExaminedCheckbox.addEventListener('change', (e) => {
         document.getElementById('edit-medicines').value = '';
     }
 });
-
 // Fetch and Display Doctors
 async function fetchAndDisplayDoctors() {
     try {
         const res = await fetch('/api/doctors');
         const doctorsByType = await res.json();
-        
         doctorsContainer.innerHTML = '';
-        
         // Order of specializations
         const specialtyOrder = [
             'General Practitioner',
@@ -123,7 +110,6 @@ async function fetchAndDisplayDoctors() {
             'Psychiatrist',
             'Other'
         ];
-        
         const specialtyTranslations = {
             'General Practitioner': 'generalPractitioner',
             'Cardiologist': 'cardiologist',
@@ -134,7 +120,6 @@ async function fetchAndDisplayDoctors() {
             'Psychiatrist': 'psychiatrist',
             'Other': 'other'
         };
-        
         specialtyOrder.forEach(specialty => {
             if (doctorsByType[specialty] && doctorsByType[specialty].length > 0) {
                 const section = document.createElement('div');
@@ -158,11 +143,9 @@ async function fetchAndDisplayDoctors() {
                             <span>${t('patients')}:</span>
                             <span class="patient-count-badge">${doctor.patientCount}</span>
                         </div>
-                    `;
-                    
+                    `; 
                     grid.appendChild(card);
-                });
-                
+                };
                 section.appendChild(grid);
                 doctorsContainer.appendChild(section);
             }
@@ -172,7 +155,6 @@ async function fetchAndDisplayDoctors() {
         doctorsContainer.innerHTML = `<p style="color: var(--text-muted);">${t('errorLoadingDoctors')}</p>`;
     }
 }
-
 // Fetch Patients
 // Fetch Patients
 async function fetchPatients(highlightName = null) {
@@ -184,7 +166,6 @@ async function fetchPatients(highlightName = null) {
         console.error('Error fetching patients:', err);
     }
 }
-
 function renderPatients(patients, highlightName = null) {
     patientGrid.innerHTML = '';
     
@@ -204,9 +185,7 @@ function renderPatients(patients, highlightName = null) {
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
         }
-        
         const statusClass = `status-${patient.status.toLowerCase()}`;
-        
         // Translate status
         const statusTranslationKeys = {
             'Waiting': 'waiting',
@@ -214,10 +193,8 @@ function renderPatients(patients, highlightName = null) {
             'Treated': 'treated'
         };
         const statusText = t(statusTranslationKeys[patient.status]) || patient.status;
-        
         // Get assigned doctor name
         const doctorName = patient.assignedDoctor ? patient.assignedDoctor.name : t('notAssigned');
-        
         // Build medicines HTML
         let medicinesHTML = '';
         if (patient.examined && patient.medicines && patient.medicines.length > 0) {
@@ -230,7 +207,6 @@ function renderPatients(patients, highlightName = null) {
                 </div>
             `;
         }
-        
         // Build examination details HTML
         let examinationHTML = '';
         if (patient.examined) {
@@ -241,7 +217,6 @@ function renderPatients(patients, highlightName = null) {
                 </div>
             `;
         }
-        
         card.innerHTML = `
             <div class="patient-header">
                 <span class="patient-name">${patient.name}</span>
@@ -263,14 +238,11 @@ function renderPatients(patients, highlightName = null) {
         patientGrid.appendChild(card);
     });
 }
-
 // Add Patient
 addPatientForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
     const medicinesInput = document.getElementById('medicines').value;
     const medicinesArray = medicinesInput ? medicinesInput.split(',').map(m => m.trim()).filter(m => m) : [];
-    
     const newPatient = {
         name: document.getElementById('name').value,
         age: document.getElementById('age').value,
